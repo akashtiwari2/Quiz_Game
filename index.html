@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MCQ Questions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Salsa&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Salsa", cursive;
+      }
+      /* html {
+        height: 100%;
+        width: 100%;
+      } */
+      body {
+        height: 100vh;
+        width: 100vw;
+      }
+      .wrapper {
+        display: flex;
+        height: 90%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+      }
+      .options button {
+        display: block;
+        padding: 2rem;
+        width: 100%;
+        margin: 1rem 0;
+        border: none;
+        background-color: #da627d;
+        border-radius: 20px;
+        color: white;
+        border-radius: 50px;
+        animation: right 1s ease-in-out 1;
+      }
+      .options button:hover {
+        background-color: #a53860;
+      }
+      .options {
+        width: 50%;
+      }
+      .questions {
+        padding: 1.5rem 10rem;
+        background-color: #450920;
+        box-shadow: 2px 2px 5px 1px #a53860;
+        border-radius: 50px;
+        font-size: 1.5rem;
+        color: white;
+        animation: left 1s ease-in-out 1;
+      }
+      .score {
+        position: absolute;
+        top: 10px;
+        right: 50px;
+      }
+      h1 {
+        text-shadow: 1px 1px 5px #a53860;
+        text-align: center;
+        height: 10%;
+      }
+      body button {
+        padding: 0.3rem 1rem;
+        border: none;
+        background-color: cadetblue;
+        color: white;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 1.5rem;
+      }
+      @keyframes right {
+        from {
+          transform: translateX(100vw);
+          opacity: 0.3;
+        }
+      }
+      @keyframes left {
+        from {
+          transform: translateX(-100vw);
+          opacity: 0.3;
+        }
+      }
+      .score {
+        font-size: 2rem;
+        color: #da627d;
+      }
+      @keyframes fadeinout {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0.9;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WebDev Quiz</h1>
+    <div class="score"></div>
+    <div class="wrapper">
+      <div class="options"></div>
+
+      <button class="next">next</button>
+      <audio class="wrong" src="buzzer-or-wrong-answer-20582.mp3"></audio>
+      <audio class="correct" src="the-correct-answer-33-183620.mp3"></audio>
+    </div>
+  </body>
+  <script>
+    let score = 0;
+    const quesJSON = [
+      {
+        question: "What does HTML stand for?",
+        options: [
+          "Hypertext Markup Language",
+          "Hyperlink and Text Markup Language",
+          "Home Tool Markup Language",
+          "Hypertext and Text Markup Language",
+        ],
+        correctAnswer: "Hypertext Markup Language",
+      },
+      {
+        question:
+          "Which CSS property is used to change the text color of an element?",
+        options: ["color", "text-color", "font-color", "foreground-color"],
+        correctAnswer: "color",
+      },
+      {
+        question:
+          "What does the acronym 'DOM' stand for in the context of web development?",
+        options: [
+          "Document Object Model",
+          "Data Object Model",
+          "Dynamic Object Model",
+          "Document Oriented Model",
+        ],
+        correctAnswer: "Document Object Model",
+      },
+      {
+        question: "Which HTML tag is used to create a hyperlink?",
+        options: ["<link>", "<a>", "<hyperlink>", "<url>"],
+        correctAnswer: "<a>",
+      },
+      {
+        question: "What does CSS stand for?",
+        options: [
+          "Counter Style Sheets",
+          "Colorful Style Sheets",
+          "Creative Style Sheets",
+          "Cascading Style Sheets",
+        ],
+        correctAnswer: "Cascading Style Sheets",
+      },
+      {
+        question:
+          "What is the purpose of the JavaScript `querySelector` method?",
+        options: [
+          "To query a database",
+          "To select and manipulate HTML elements",
+          "To perform mathematical calculations",
+          "To create animations",
+        ],
+        correctAnswer: "To select and manipulate HTML elements",
+      },
+      {
+        question:
+          "In CSS, what property is used to control the spacing between lines of text?",
+        options: [
+          "line-height",
+          "letter-spacing",
+          "word-spacing",
+          "text-spacing",
+        ],
+        correctAnswer: "line-height",
+      },
+      {
+        question: "Which HTML tag is used to define an unordered list?",
+        options: ["<ul>", "<ol>", "<li>", "<dl>"],
+        correctAnswer: "<ul>",
+      },
+      {
+        question:
+          "What is the purpose of the JavaScript `addEventListener` method?",
+        options: [
+          "To add styles to an element",
+          "To handle events like clicks or keypresses",
+          "To create animations",
+          "To manipulate the DOM structure",
+        ],
+        correctAnswer: "To handle events like clicks or keypresses",
+      },
+      // Add more questions similarly
+      // ...
+    ];
+    let queno = 0;
+    let questionel = document.querySelector(".questions");
+    let optionsel = document.querySelector(".options");
+    let scoreel = document.querySelector(".score");
+    let nxt = document.querySelector(".next");
+    let correctsound = document.querySelector(".correct");
+    let wrongsound = document.querySelector(".wrong");
+    let wrapper = document.querySelector(".wrapper");
+    nxt.addEventListener("click", () => {
+      queno++;
+      scoreel.textContent = `Score: ${score}`;
+      nextquestion();
+    });
+    function randomise(arr) {
+      for (let i in arr) {
+        let j = Math.floor(Math.random() * i);
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+    let que;
+    function showquestion() {
+      quesJSON[queno].options = randomise(quesJSON[queno].options);
+      que = document.createElement("div");
+      que.className = "questions";
+      que.textContent = quesJSON[queno].question;
+      wrapper.prepend(que);
+      for (let i of quesJSON[queno].options) {
+        let btn = document.createElement("button");
+        btn.textContent = i;
+        optionsel.append(btn);
+        btn.addEventListener("click", () => {
+          if (i == quesJSON[queno].correctAnswer) {
+            score++;
+            correctsound.play();
+            btn.style.cssText +=
+              "background-color:green; animation: fadeinout 0.5s ease-in-out 1 alternate;";
+          } else {
+            score -= 0.25;
+            btn.style.cssText +=
+              "background-color:red; animation: fadeinout 0.5s ease-in-out 1 alternate;";
+
+            wrongsound.play();
+          }
+          scoreel.textContent = `Score: ${score}`;
+          queno++;
+
+          setTimeout(() => {
+            nextquestion();
+          }, 1800);
+        });
+      }
+    }
+    function nextquestion() {
+      if (queno < quesJSON.length) {
+        que.remove();
+        optionsel.textContent = "";
+        showquestion();
+      } else {
+        que.textContent = "Quiz Over";
+        optionsel.remove();
+        nxt.remove();
+        scoreel.textContent = `Score: ${score}`;
+      }
+    }
+    showquestion();
+    document.addEventListener("contextmenu", (ev) => {
+      ev.preventDefault();
+    });
+  </script>
+</html>

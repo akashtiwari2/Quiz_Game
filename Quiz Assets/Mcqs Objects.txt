@@ -1,0 +1,82 @@
+const quesJSON = [
+      {
+        question: "What does HTML stand for?",
+        options: [
+          "Hypertext Markup Language",
+          "Hyperlink and Text Markup Language",
+          "Home Tool Markup Language",
+          "Hypertext and Text Markup Language",
+        ],
+        correctAnswer: "Hypertext Markup Language",
+      },
+      {
+        question:
+          "Which CSS property is used to change the text color of an element?",
+        options: ["color", "text-color", "font-color", "foreground-color"],
+        correctAnswer: "color",
+      },
+      {
+        question:
+          "What does the acronym 'DOM' stand for in the context of web development?",
+        options: [
+          "Document Object Model",
+          "Data Object Model",
+          "Dynamic Object Model",
+          "Document Oriented Model",
+        ],
+        correctAnswer: "Document Object Model",
+      },
+      {
+        question: "Which HTML tag is used to create a hyperlink?",
+        options: ["<link>", "<a>", "<hyperlink>", "<url>"],
+        correctAnswer: "<a>",
+      },
+      {
+        question: "What does CSS stand for?",
+        options: [
+          "Counter Style Sheets",
+          "Colorful Style Sheets",
+          "Creative Style Sheets",
+          "Cascading Style Sheets",
+        ],
+        correctAnswer: "Cascading Style Sheets",
+      },
+      {
+        question:
+          "What is the purpose of the JavaScript `querySelector` method?",
+        options: [
+          "To query a database",
+          "To select and manipulate HTML elements",
+          "To perform mathematical calculations",
+          "To create animations",
+        ],
+        correctAnswer: "To select and manipulate HTML elements",
+      },
+      {
+        question:
+          "In CSS, what property is used to control the spacing between lines of text?",
+        options: [
+          "line-height",
+          "letter-spacing",
+          "word-spacing",
+          "text-spacing",
+        ],
+        correctAnswer: "line-height",
+      },
+      {
+        question: "Which HTML tag is used to define an unordered list?",
+        options: ["<ul>", "<ol>", "<li>", "<dl>"],
+        correctAnswer: "<ul>",
+      },
+      {
+        question:
+          "What is the purpose of the JavaScript `addEventListener` method?",
+        options: [
+          "To add styles to an element",
+          "To handle events like clicks or keypresses",
+          "To create animations",
+          "To manipulate the DOM structure",
+        ],
+        correctAnswer: "To handle events like clicks or keypresses",
+      }
+    ];
