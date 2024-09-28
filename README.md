@@ -45,7 +45,7 @@ To run this project, you'll need a modern web browser (e.g., Chrome, Firefox, Sa
 
 ### Live Demo
 
-To experience the quiz live, [click here](https://your-demo-link.com).
+To experience the quiz live, [click here](https://akashtiwari2.github.io/Quiz_Game/).
 
 ## Usage
 
